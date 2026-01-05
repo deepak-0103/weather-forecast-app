@@ -16,17 +16,17 @@ UVValue = document.getElementById('UVValue'),
 
 forcast = document.querySelector('.forcast');
 
-//WEATHER_DATA_ENDPOINT=`https://api.openweathermap.org/data/2.5/onecall?appid=a5bb4718b30b6f58f58697997567fffa&exclude=minutely&units=metric&`;
+// WEATHER_DATA_ENDPOINT=`https://api.openweathermap.org/data/2.5/onecall?appid=a5bb4718b30b6f58f58697997567fffa&exclude=minutely&units=metric&`;
 //
 //https://api.openweathermap.org/data/2.5/weather?appid=a5bb4718b30b6f58f58697997567fffa&q=
-WEATHER_API_ENDPOINT=`https://api.openweathermap.org/data/2.5/weather?appid=ded7384fa6c0c2041814c28285d0dc5f&q=`;
-WEATHER_DATA_ENDPOINT=`https://api.openweathermap.org/data/3.0/onecall?lat=33.44&lon=-94.04&appid=ded7384fa6c0c2041814c28285d0dc5f&exclude=minutely&units=`;
+WEATHER_API_ENDPOINT=`https://api.openweathermap.org/data/2.5/weather?appid=a5bb4718b30b6f58f58697997567fffa&q=`;
+WEATHER_DATA_ENDPOINT=`https://api.openweathermap.org/data/3.0/onecall?appid=ded7384fa6c0c2041814c28285d0dc5f&exclude=minutely&units=metric&`;
 function findUserLocation(){
     forcast.innerHTML= "";
     fetch(WEATHER_API_ENDPOINT+ userLocation.value )
     .then(res=>res.json())
     .then((data)=>{
-        if(data.cod != "" && data.cod != "200")
+        if(data.cod != "" && data.cod != 200)
             {
            alert(data.message);
             return;
