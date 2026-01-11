@@ -19,11 +19,11 @@ forcast = document.querySelector('.forcast');
 // WEATHER_DATA_ENDPOINT=`https://api.openweathermap.org/data/2.5/onecall?appid=a5bb4718b30b6f58f58697997567fffa&exclude=minutely&units=metric&`;
 //
 //https://api.openweathermap.org/data/2.5/weather?appid=a5bb4718b30b6f58f58697997567fffa&q=
-WEATHER_API_ENDPOINT=`https://api.openweathermap.org/data/2.5/weather?appid=a5bb4718b30b6f58f58697997567fffa&q=`;
+WEATHER_API_ENDPOINT=`https://api.openweathermap.org/data/2.5/weather?appid=ded7384fa6c0c2041814c28285d0dc5f&q=`;
 WEATHER_DATA_ENDPOINT=`https://api.openweathermap.org/data/3.0/onecall?appid=ded7384fa6c0c2041814c28285d0dc5f&exclude=minutely&units=metric&`;
 function findUserLocation(){
     forcast.innerHTML= "";
-    fetch(WEATHER_API_ENDPOINT+ userLocation.value )
+    fetch(WEATHER_API_ENDPOINT+ userLocation.value)
     .then(res=>res.json())
     .then((data)=>{
         if(data.cod != "" && data.cod != 200)
@@ -37,14 +37,14 @@ function findUserLocation(){
         weatherIcon.style.background = `url(https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png)`; 
         fetch(WEATHER_DATA_ENDPOINT+ `lon=${data.coord.lon}&lat=${data.coord.lat}`)
         .then(res=>res.json())
-        .then((data)=>{
+        .then(async (data)=>{
          console.log(data);
          temperature.innerHTML = TemConverter(data.current.temp);
          feelsLike.innerHTML = "Feels like " + data.current.feels_like;
          description.innerHTML = `<i class = "fa-brands fa-cloudversify"></i> &nbsp;` + data.current.weather[0].description;
          const options= { weekday: 'long', month: 'long', day: 'numeric', minute: "numeric", hour12: true, };
-         date.innerHTML=getLongFormateDateTime(
-            data.current.dt,data.timezone_offSet, 
+         date.innerHTML=await getLongFormateDateTime(
+            data.current.dt,data.timezone_offset, 
             options);
 
          HValue.innerHTML = Math.round(data.current.humidity)+ "<span>%</span>";
@@ -53,8 +53,8 @@ function findUserLocation(){
             hour: "numeric", 
             minute: "numeric", 
             hour12: true };
-         SRValue.innerHTML=getLongFormateDateTime(data.current.sunrise,data.timezone_offSet, options1);
-         SSValue.innerHTML=getLongFormateDateTime(data.current.sunset,data.timezone_offSet, options1);
+         SRValue.innerHTML=await getLongFormateDateTime(data.current.sunrise,data.timezone_offset, options1);
+         SSValue.innerHTML= await getLongFormateDateTime(data.current.sunset,data.timezone_offset, options1);
 
          CValue.innerHTML = data.current.clouds+ "<span>%</span>";
          UVValue.innerHTML =data.current.uvi;
