@@ -42,7 +42,14 @@ function findUserLocation(){
          temperature.innerHTML = TemConverter(data.current.temp);
          feelsLike.innerHTML = "Feels like " + data.current.feels_like;
          description.innerHTML = `<i class = "fa-brands fa-cloudversify"></i> &nbsp;` + data.current.weather[0].description;
-         const options= { weekday: 'long', month: 'long', day: 'numeric', minute: "numeric", hour12: true, };
+         const options= { 
+            weekday: "long", 
+            month: "long", 
+            // day: "numeric", 
+            // minute: "numeric", 
+            
+            hour12: true, 
+        };
          date.innerHTML=await getLongFormateDateTime(
             data.current.dt,data.timezone_offset, 
             options);
@@ -52,7 +59,8 @@ function findUserLocation(){
          const options1= { 
             hour: "numeric", 
             minute: "numeric", 
-            hour12: true };
+            hour12: true, 
+        };
          SRValue.innerHTML=await getLongFormateDateTime(data.current.sunrise,data.timezone_offset, options1);
          SSValue.innerHTML= await getLongFormateDateTime(data.current.sunset,data.timezone_offset, options1);
 
@@ -62,9 +70,10 @@ function findUserLocation(){
          data.daily.forEach((weather)=>{
               let div = document.createElement("div");
               const options ={ 
-                 weekday: 'long',
-                 month: 'long',
-                 day: 'numeric',};
+                 weekday: "long",
+                 month: "long",
+                 day: "numeric",
+                };
             
               let daily = getLongFormateDateTime(weather.dt, 0, options).split(" at ");
               div.innerHTML= daily[0];
