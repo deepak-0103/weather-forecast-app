@@ -45,9 +45,6 @@ function findUserLocation(){
          const options= { 
             weekday: "long", 
             month: "long", 
-            // day: "numeric", 
-            // minute: "numeric", 
-            
             hour12: true, 
         };
          date.innerHTML=await getLongFormateDateTime(
