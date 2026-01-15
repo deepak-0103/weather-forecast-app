@@ -45,7 +45,9 @@ function findUserLocation(){
          const options= { 
             weekday: "long", 
             month: "long", 
-            hour12: true, 
+            day: "numeric",
+            hour12: true,
+            hour : "numeric", 
         };
          date.innerHTML=await getLongFormateDateTime(
             data.current.dt,data.timezone_offset, 
@@ -70,6 +72,9 @@ function findUserLocation(){
                  weekday: "long",
                  month: "long",
                  day: "numeric",
+                 hour12: true,
+                 hour : "numeric",       
+                 
                 };
             
               let daily = getLongFormateDateTime(weather.dt, 0, options).split(" at ");
@@ -86,12 +91,12 @@ function findUserLocation(){
        
     })
 }
-function formatUnixTime(dtValue, offSet, options = {}) {
+function formatUnixTime(dtValue, offSet, option = {}) {
     const date = new Date((dtValue+offSet)*1000);
-    return date.toLocaleTimeString([], {timeZone: "UTC", ...options });
+    return date.toLocaleTimeString([], {timeZone: "UTC", ...option });
 }
-function getLongFormateDateTime(dtValue, offSet, options) {
-    return formatUnixTime(dtValue, offSet, options);
+function getLongFormateDateTime(dtValue, offSet, option) {
+    return formatUnixTime(dtValue, offSet, option);
 
 }
 
